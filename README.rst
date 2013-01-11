@@ -11,6 +11,7 @@ Installation
 Easy Log can be installed with the following command:
 
 ::
+
 	python setup.py install
 
 Usage
@@ -18,16 +19,19 @@ Usage
 You can import the library with the code:
 
 ::
+
 	from easylog import *
 
 Then, create an object which will be your 'logger'.
 
 ::
+
 	mylog = easylog.EasyLog()
 
 You can set the configuration variables with certain functions:
 
 ::
+
 	mylog.setFname(self, "mylog.txt")
 	print mylog.fname
 	
@@ -46,6 +50,7 @@ You can set the configuration variables with certain functions:
 It is also possible to give your log object these parameters when you create it:
 
 ::
+
 	mylog = easylog.EasyLog(fname="mylog.txt", showTime=False)
 
 To log a message, use the following syntax: ``mylog.log(message, msgType)``
