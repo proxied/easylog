@@ -1,13 +1,13 @@
 from distutils.core import setup
 
 setup(
-    name='samplepackage',
-    version='0.1.0',
-    author='John Doe',
-    author_email='ex@example.com',
+    name='easylog',
+    version='0.3.0',
+    author='Jake Robertson',
+    author_email='esbve1@gmail.com',
     packages=["easylog"],
     scripts=[],
-    url='http://www.example.com',
+    url='https://github.com/Proxied/easylog',
     license='LICENSE.txt',
     description='A sample Python package of modules.',
     long_description=open('README.rst').read(),
