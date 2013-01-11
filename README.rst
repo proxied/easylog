@@ -59,11 +59,15 @@ With message being your message (obviously) and msgType being the type, I.E., "W
 Variables
 ===========
 
-========  ===========  ===============
-  Name      Default      Description
-========  ===========  ===============
-fname  	  "log.txt"    The file name to store logs.
-defType   "INFO"  	   The default log message type.
-showTime  True   	   Determines whether to add time stamp to logs.
-showType  True   	   Determines whether to add the type of message.
-=====  =====  ======
+
++==========+==========+=========================================================+
+| Name     | Default  | Description                                             |
++==========+==========+=========================================================+
+| fname    | "log.txt"| The file name to store the logs.                        |
++----------+----------+---------------------------------------------------------+
+| defType  | "INFO"   | The default lof message type.                           |
++----------+----------+---------------------------------------------------------+
+| showTime | True     | Determines whether to add time stamp to logs.           |
++----------+----------+---------------------------------------------------------+
+| showType | True     | Determines whether to add the type of message.          |
++----------+----------+---------------------------------------------------------+
