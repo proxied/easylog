@@ -6,8 +6,8 @@ class EasyLog:
 	def __init__(self, **attrs):
 		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
 
-		defaultVariables = ["fname","defType","showTime"] # Default variable list
-		defaultValues = ["log.txt", "INFO", True] # Default values list
+		defaultVariables = ["fname","defType","showTime","showType"] # Default variable list
+		defaultValues = ["log.txt", "INFO", True, True] # Default values list
 
 		for var in defaultVariables:
 			if var not in self.__dict__:
@@ -32,11 +32,20 @@ class EasyLog:
 		# Defaults to the boolean True
 		self.showTime = showTime
 
+	def setShowType(self, showType):
+		# The showType variable determines whether the type of the log message should be included.
+		# Defaults to the boolean True
+		self.showType = showType
+
 	def setVar(self, **attrs):
 		# Edits any number of variables you want.
 		# Example usage:    mylog.setVar(fname="logfile.txt", showTime=False)
 		self.__dict__.update(**attrs)
 
-	def log(self, text=""):
-		print "DEBUG VERSION:"
-		print "File:", self.fname, "- Type:", self.defType, "- Show Time: ", self.showTime, "- Text:", text
+	def log(self, text="", msgType=""):
+		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
+
+		with open(self.fname, "a") as log: # Opens the log file for appending
+			if self.showTime: log.write("(" + "00:00:00" + ") ")
+			if self.showType: log.write("[" + msgType + "] ")
+			log.write(text + "\n")

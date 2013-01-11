@@ -1,1 +1,3 @@
+v0.3.0 : 1/11/2013 -- Actually logs now; added showType variable; log() func now optionally takes msgType var.
+v0.2.0 : 1/11/2013 -- EasyLog instances will make default values for variables. Added setVar func.
 v0.1.0 : 1/11/2013 -- Initial version. Very basic.
