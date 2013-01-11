@@ -1,0 +1,6 @@
+To see how this works, first install the setup.py file.
+	(EX: You can do this with:
+		python setup.py install
+	while in the containter directory)
+	
+**To be updated
