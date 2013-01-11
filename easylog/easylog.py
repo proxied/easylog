@@ -2,10 +2,20 @@
 
 class EasyLog:
 	# Usage: EasyLog(fname="log.txt",defType="INFO",showTime=True)
+
 	def __init__(self, **attrs):
-		self.__dict__.update(**attrs)
+		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
+
+		defaultVariables = ["fname","defType","showTime"] # Default variable list
+		defaultValues = ["log.txt", "INFO", True] # Default values list
+
+		for var in defaultVariables:
+			if var not in self.__dict__:
+				self.__dict__.update({var:defaultValues[defaultVariables.index(var)]}) # Add the variable (from defaultVariables) as the key, and the 
+                                                                                                                                                                      # corresponding value from defaultValues into the dictionary
+                                                                                                                                                                       
 	def __getattr__(self, attr):
-		return self.__dict__.get(attr, None)
+		return self.__dict__.get(attr, None) # Return the variable from the dictionary
 
 	def setFname(self, fname):
 		# The fname variable is the file that the log messages will be logged to.
@@ -21,6 +31,11 @@ class EasyLog:
 		# The showTime variable determines whether a time stamp should be included in log messages.
 		# Defaults to the boolean True
 		self.showTime = showTime
+
+	def setVar(self, **attrs):
+		# Edits any number of variables you want.
+		# Example usage:    mylog.setVar(fname="logfile.txt", showTime=False)
+		self.__dict__.update(**attrs)
 
 	def log(self, text=""):
 		print "DEBUG VERSION:"
