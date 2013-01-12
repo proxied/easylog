@@ -8,8 +8,8 @@ class EasyLog:
 	def __init__(self, **attrs):
 		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
 
-		defaultVariables = ["fname","defType","showTime","showType"] # Default variable list
-		defaultValues = ["log.txt", "INFO", True, True] # Default values list
+		defaultVariables = ["fname","defType","showTime","showType","printLogs"] # Default variable list
+		defaultValues = ["log.txt", "INFO", True, True, False] # Default values list
 
 		for var in defaultVariables:
 			if var not in self.__dict__:
@@ -39,6 +39,11 @@ class EasyLog:
 		# Defaults to the boolean True
 		self.showType = showType
 
+	def setPrintLogs(self, printLogs):
+		# The printLogs variable determines whether to print out log messages when they are written.
+		# Defaults to the boolean False
+		self.printLogs = printLogs
+
 	def setVar(self, **attrs):
 		# Edits any number of variables you want.
 		# Example usage:    mylog.setVar(fname="logfile.txt", showTime=False)
@@ -51,10 +56,12 @@ class EasyLog:
 		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
 		curtime = strftime("%Y-%m-%d %H:%M:%S", localtime()) # Loads the current time into a string
 
+		message = "(%s) [%s] %s\n" % (curtime, msgType, text)
+
 		with open(self.fname, "a") as log: # Opens the log file for appending
-			if self.showTime: log.write("(" + curtime + ") ")
-			if self.showType: log.write("[" + msgType + "] ")
-			log.write(text + "\n")
+			log.write(message)
+
+		if self.printLogs: print message # Prints out the log message if we are supposed to
  
 	def search(self, text=""):
 		# Searches through the log file and returns a list of lines that contain a string.
@@ -81,9 +88,9 @@ class EasyLog:
 			matches = []
 
 			for line in loglist:
-				if hour and not minute and not second:  
-					if hour==line[0]: matches.append(oldloglist[loglist.index(line)])
-				if hour and minute and not second: 
+				if hour and not minute and not second:  # If hour specified, minute not specified, and second not specified:
+					if hour==line[0]: matches.append(oldloglist[loglist.index(line)]) # Append the unedited loglist at the current index
+				if hour and minute and not second: # Same style as above
 					if hour==line[0] and minute==line[1]: matches.append(oldloglist[loglist.index(line)])
 				if hour and not minute and second:
 					if hour==line[0] and second==line[2]: matches.append(oldloglist[loglist.index(line)])
@@ -114,9 +121,9 @@ class EasyLog:
 			for x in range(len(loglist)):
 				line = loglist[x]
 
-				if year and not month and not day:  
-					if year==line[0]: matches.append(oldloglist[loglist.index(line)])
-				if year and month and not day: 
+				if year and not month and not day:  # If year specified, month not specified, and day not specified:
+					if year==line[0]: matches.append(oldloglist[loglist.index(line)]) # Append the unedited loglist at the current index
+				if year and month and not day: # Same style as above
 					if year==line[0] and month==line[1]: matches.append(oldloglist[loglist.index(line)])
 				if year and not month and day:
 					if year==line[0] and day==line[2]: matches.append(oldloglist[x])

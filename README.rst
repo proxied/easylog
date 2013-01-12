@@ -34,17 +34,20 @@ You can set the configuration variables with certain functions:
 
 ::
 
-	mylog.setFname(self, "mylog.txt")
+	mylog.setFname("mylog.txt")
 	print mylog.fname
 	
-	mylog.setDefType(self, "WARNING")
+	mylog.setDefType("WARNING")
 	print mylog.defType
 	
-	mylog.setShowTime(self, False)
+	mylog.setShowTime(False)
 	print mylog.showTime
 	
-	mylog.setShowType(self, True)
+	mylog.setShowType(True)
 	print mylog.showType
+	
+	mylog.setPrintLogs(True)
+	print mylog.printLogs
 	
 	mylog.setVar(fname="mylogV2.txt", showType=True)
 	print mylog.fname, mylog.showType
@@ -99,11 +102,12 @@ Variables
 
 Here is a table of the different variables you are able to configure:
 
-========  ===========  =============================================
+=========  ===========  =============================================
   Name      Default                     Description
-========  ===========  =============================================
-fname     "log.txt"    The file name to store the logs.
-defType   "INFO"       The default message type.
-showTime  True         Determines whether to add time stamp to logs.
-showType  True         Determines whether to add the type to logs.
-========  ===========  =============================================
+=========  ===========  =============================================
+fname      "log.txt"    The file name to store the logs.
+defType    "INFO"       The default message type.
+showTime   True         Determines whether to add time stamp to logs.
+showType   True         Determines whether to add the type to logs.
+printLogs  False       Determines whether to print out log messages.
+=========  ===========  =============================================
