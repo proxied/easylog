@@ -8,6 +8,15 @@ class EasyLog:
 	def __init__(self, **attrs):
 		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
 
+		try:
+			from pygooglechart import PieChart3D
+			self.canChart = True
+		except:
+			# You don't have pygooglechart. Nothing wrong with that,
+			# but lets just set a variable so we don't try to access it.
+			self.canChart = False
+
+
 		defaultVariables = ["fname","defType","showTime","showType","printLogs"] # Default variable list
 		defaultValues = ["log.txt", "INFO", True, True, False] # Default values list
 
@@ -54,6 +63,7 @@ class EasyLog:
 		# (YYYY-MM-DD HH-MM-SS) [TYPE] Your message here.
 
 		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
+
 		curtime = strftime("%Y-%m-%d %H:%M:%S", localtime()) # Loads the current time into a string
 
 		message = "(%s) [%s] %s\n" % (curtime, msgType, text)
@@ -138,9 +148,27 @@ class EasyLog:
 
 			return matches
 
+	def searchTypes(self,format="tuple"):
+		# Searches through the log file and returns a dictionary in the format {TYPE: OCCURENCES}
+
+		with open(self.fname, "r") as log: # Opens the log file for reading
+			loglist = log.readlines() # Put the log file into array, one line per index
+			types, occurences = [], []
+
+			loglist = [line.split("]")[0] for line in loglist] # Seperate into just the type
+			loglist = [line.split("[")[1] for line in loglist] # Seperate into just the type
+
+			for line in loglist:
+				if not line in types: types.append(line); occurences.append(1) # Add this type to the list if needed
+				elif line in types: occurences[types.index(line)]+=1 # Update the corresponding value
+
+			if format == "dict": return dict(zip(types,occurences))
+			elif format == "tuple": return (types,occurences)
+
 	def clear(self):
 		# Completely clears out the log file.
 		with open(self.fname, "w"): pass
+		print canChart
 
 	def read(self):
 		# Returns the contents of the log file as a single string.

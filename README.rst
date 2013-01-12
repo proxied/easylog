@@ -67,7 +67,7 @@ Searching
 ---------
 Easy Log also makes it possible to search through your log file for certain things.
 
-There are three different search functions: ``search(text)``, ``searchTime(hour,minute,second)``, and ``searchDate(year,month,day)``.
+There are four different search functions: ``search(text)``, ``searchTime(hour,minute,second)``, ``searchDate(year,month,day)``, and ``searchTypes(format)``.
 
 ``search(text)`` will go through every line in the log and return an array of lines which conain ``text``.
 
@@ -75,6 +75,10 @@ There are three different search functions: ``search(text)``, ``searchTime(hour,
 given. To get any of one of the variables, I.E., any second, put ``None``.
 
 ``searchDate(year,month,day)`` works just like ``searchTime()``, but returns array of matching dates.
+
+``searchTypes(format)`` returns the message types in the log file and their occurences. Specifying ``format`` is optional.
+By default, it is 'tuple' which will return a tuple (types,occurences) with types and occurences both being lists. Alternatively,
+you can specify the format as ``'dict'`` to get a dictionary in the form ``{TYPE:OCCURENCES}``.
 
 Search Examples
 ---------------
@@ -95,6 +99,8 @@ Search Examples
 	mylog.searchTime(None,"14") # Returns both lines
 	mylog.searchDate(None,None,"11") # Returns first line
 	mylog.searchDate("2013","01") # Returns both lines
+	mylog.searchTypes() # Returns ['INFO','ERROR'],[1,1]
+	mylog.searchTypes('dict') # Returns {'INFO':1, 'ERROR':1}
 
 Other Functions
 ---------------
