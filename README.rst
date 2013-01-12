@@ -59,6 +59,7 @@ With message being your message (obviously) and msgType being the type, I.E., "W
 Variables
 ===========
 
+Here is a table of the different variables you are able to configure:
 
 +==========+==========+=========================================================+
 | Name     | Default  | Description                                             |

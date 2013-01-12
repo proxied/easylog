@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from time import localtime, strftime
+
 class EasyLog:
 	# Usage: EasyLog(fname="log.txt",defType="INFO",showTime=True)
 
@@ -44,8 +46,9 @@ class EasyLog:
 
 	def log(self, text="", msgType=""):
 		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
+		curtime = strftime("%Y-%m-%d %H:%M:%S", localtime()) # Loads the current time into a string
 
 		with open(self.fname, "a") as log: # Opens the log file for appending
-			if self.showTime: log.write("(" + "00:00:00" + ") ")
+			if self.showTime: log.write("(" + curtime + ") ")
 			if self.showType: log.write("[" + msgType + "] ")
 			log.write(text + "\n")
