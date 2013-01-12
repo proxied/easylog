@@ -32,7 +32,7 @@ Configuration Options
 ---------------------
 You can set the configuration variables with certain functions:
 
-```python
+::
 
 	mylog.setFname(self, "mylog.txt")
 	print mylog.fname
@@ -48,7 +48,7 @@ You can set the configuration variables with certain functions:
 	
 	mylog.setVar(fname="mylogV2.txt", showType=True)
 	print mylog.fname, mylog.showType
-```	
+	
 
 It is also possible to give your log object these parameters when you create it:
 
@@ -76,7 +76,7 @@ given. To get any of one of the variables, I.E., any second, put ``None``.
 Search Examples
 ---------------
 
-```python
+::
 
 	# Imagine that we have a log.txt file which looks like this:
 	#
@@ -92,7 +92,7 @@ Search Examples
 	mylog.searchTime(None,"14") # Returns both lines
 	mylog.searchDate(None,None,"11") # Returns first line
 	mylog.searchDate("2013","01") # Returns both lines
-```
+
 
 Variables
 ===========
