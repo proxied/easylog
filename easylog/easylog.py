@@ -97,3 +97,36 @@ class EasyLog:
 					if second==line[2]: matches.append(oldloglist[loglist.index(line)])
 
 			return matches
+
+	def searchDate(self, year=None, month=None, day=None):
+		# Searches through the log file and returns a list of lines that have specified date stamp
+		# Note: year, month, and day must be strings
+
+		with open(self.fname, "r") as log: # Opens the log file for reading
+			loglist = log.readlines()
+			oldloglist = loglist
+			loglist = [line.split(")")[0] for line in loglist] # Seperate into just time & date stamp
+			loglist = [line.split(" ")[0] for line in loglist] # Seperate into just date stamp
+			loglist = [line.replace("(", "") for line in loglist] # Get rid of the beginning parenthesis
+			loglist = [line.split("-") for line in loglist] # Seperate by year, month, and day
+			matches = []
+
+			for x in range(len(loglist)):
+				line = loglist[x]
+
+				if year and not month and not day:  
+					if year==line[0]: matches.append(oldloglist[loglist.index(line)])
+				if year and month and not day: 
+					if year==line[0] and month==line[1]: matches.append(oldloglist[loglist.index(line)])
+				if year and not month and day:
+					if year==line[0] and day==line[2]: matches.append(oldloglist[x])
+				if year and month and day: 
+					if year==line[0] and month==line[1] and day==line[2]: matches.append(oldloglist[loglist.index(line)])
+				if not year and month and not day: 
+					if month==line[1]: matches.append(oldloglist[loglist.index(line)])
+				if not year and month and day: 
+					if month==line[1] and day==line[2]: matches.append(oldloglist[loglist.index(line)])
+				if not year and not month and day: 
+					if day==line[2]: matches.append(oldloglist[loglist.index(line)])
+
+			return matches
