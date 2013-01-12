@@ -28,9 +28,11 @@ Then, create an object which will be your 'logger'.
 
 	mylog = easylog.EasyLog()
 
+Configuration Options
+---------------------
 You can set the configuration variables with certain functions:
 
-::
+```python
 
 	mylog.setFname(self, "mylog.txt")
 	print mylog.fname
@@ -46,18 +48,23 @@ You can set the configuration variables with certain functions:
 	
 	mylog.setVar(fname="mylogV2.txt", showType=True)
 	print mylog.fname, mylog.showType
-	
+```	
+
 It is also possible to give your log object these parameters when you create it:
 
 ::
 
 	mylog = easylog.EasyLog(fname="mylog.txt", showTime=False)
 
+
 To log a message, use the following syntax: ``mylog.log(message, msgType)``
 With message being your message (obviously) and msgType being the type, I.E., "WARNING".
 
+Searching
+---------
 Easy Log also makes it possible to search through your log file for certain things.
-There are three different search functions, ``search(text)``, ``searchTime(hour,minute,second)``, and ``searchDate(year,month,day)``.
+
+There are three different search functions: ``search(text)``, ``searchTime(hour,minute,second)``, and ``searchDate(year,month,day)``.
 
 ``search(text)`` will go through every line in the log and return an array of lines which conain ``text``.
 
@@ -66,9 +73,10 @@ given. To get any of one of the variables, I.E., any second, put ``None``.
 
 ``searchDate(year,month,day)`` works just like ``searchTime()``, but returns array of matching dates.
 
-Search examples:
+Search Examples
+---------------
 
-::
+```python
 
 	# Imagine that we have a log.txt file which looks like this:
 	#
@@ -84,7 +92,7 @@ Search examples:
 	mylog.searchTime(None,"14") # Returns both lines
 	mylog.searchDate(None,None,"11") # Returns first line
 	mylog.searchDate("2013","01") # Returns both lines
-	
+```
 
 Variables
 ===========
