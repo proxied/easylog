@@ -1,3 +1,4 @@
+v0.4.0 : 1/12/2013 -- Added search() and searchTime() functions.
 v0.3.2 : 1/11/2013 -- Time stamps now work properly.
 v0.3.1 : 1/11/2013 -- Updated README.rst
 v0.3.0 : 1/11/2013 -- Actually logs now; added showType variable; log() func now optionally takes msgType var.

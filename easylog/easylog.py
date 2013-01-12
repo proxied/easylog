@@ -45,6 +45,9 @@ class EasyLog:
 		self.__dict__.update(**attrs)
 
 	def log(self, text="", msgType=""):
+		# Logs to fname a message in the following format:
+		# (YYYY-MM-DD HH-MM-SS) [TYPE] Your message here.
+
 		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
 		curtime = strftime("%Y-%m-%d %H:%M:%S", localtime()) # Loads the current time into a string
 
@@ -52,3 +55,45 @@ class EasyLog:
 			if self.showTime: log.write("(" + curtime + ") ")
 			if self.showType: log.write("[" + msgType + "] ")
 			log.write(text + "\n")
+ 
+	def search(self, text=""):
+		# Searches through the log file and returns a list of lines that contain a string.
+
+		with open(self.fname, "r") as log: # Opens the log file for reading
+			loglist = log.readlines() # Put the log file into array, one line per index
+			matches = []
+
+			for line in loglist:
+				if text in line: 
+					matches.append(line)
+			return matches
+
+	def searchTime(self, hour=None, minute=None, second=None):
+		# Searches through the log file and returns a list of lines that have specified time stamp
+		# Note: hour, minute, and second must be strings
+
+		with open(self.fname, "r") as log: # Opens the log file for reading
+			loglist = log.readlines()
+			oldloglist = loglist
+			loglist = [line.split(")")[0] for line in loglist] # Seperate into just time & date stamp
+			loglist = [line.split(" ")[1] for line in loglist] # Seperate into just time stamp
+			loglist = [line.split(":") for line in loglist] # Seperate by hours, minutes, and seconds
+			matches = []
+
+			for line in loglist:
+				if hour and not minute and not second:  
+					if hour==line[0]: matches.append(oldloglist[loglist.index(line)])
+				if hour and minute and not second: 
+					if hour==line[0] and minute==line[1]: matches.append(oldloglist[loglist.index(line)])
+				if hour and not minute and second:
+					if hour==line[0] and second==line[2]: matches.append(oldloglist[loglist.index(line)])
+				if hour and minute and second: 
+					if hour==line[0] and minute==line[1] and second==line[2]: matches.append(oldloglist[loglist.index(line)])
+				if not hour and minute and not second: 
+					if minute==line[1]: matches.append(oldloglist[loglist.index(line)])
+				if not hour and minute and second: 
+					if minute==line[1] and second==line[2]: matches.append(oldloglist[loglist.index(line)])
+				if not hour and not minute and second: 
+					if second==line[2]: matches.append(oldloglist[loglist.index(line)])
+
+			return matches
