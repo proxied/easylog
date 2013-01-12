@@ -109,6 +109,10 @@ You can easily completely erase your log file by calling ``mylog.clear()``.
 
 You can read the contents of your log file as a single string with ``mylog.read()``.
 
+You can generate a chart of the different message types in your log file with chart(pname) with
+pname being the name of the generated picture file (if not specified, will use log.png).
+NOTE: Generating charts requires [pygooglechart](http://pygooglechart.slowchop.com/ "pygooglechart")
+
 
 Variables
 ===========

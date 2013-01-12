@@ -8,15 +8,6 @@ class EasyLog:
 	def __init__(self, **attrs):
 		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
 
-		try:
-			from pygooglechart import PieChart3D
-			self.canChart = True
-		except:
-			# You don't have pygooglechart. Nothing wrong with that,
-			# but lets just set a variable so we don't try to access it.
-			self.canChart = False
-
-
 		defaultVariables = ["fname","defType","showTime","showType","printLogs"] # Default variable list
 		defaultValues = ["log.txt", "INFO", True, True, False] # Default values list
 
@@ -175,3 +166,23 @@ class EasyLog:
 		# If you want to get it as an array, use search() with no
 		# parameters instead.
 		with open(self.fname, "r") as log: return log.read()
+
+	def chart(self, pname="log.png"):
+		# If you have pygooglechart, will create a file pname which has a chart of the used types
+		# and their number of occurences.
+		# If you want it, get it at:
+
+		# pygooglechart.slowchop.com
+
+		try:
+			from pygooglechart import PieChart3D
+			chart = PieChart3D(300,100)
+			typedata = self.searchTypes() # Get the types and corresponding occurences
+			typedatadict = self.searchTypes('dict')
+
+			chart.add_data(typedata[1]) # Fill in the occurences
+			chart.set_pie_labels([s + "[" + str(typedatadict[s]) + "]" for s in typedata[0]]) # Fill in the labels
+			chart.download(pname)
+		except:
+			return False # You probably don't have pygooglechart
+
