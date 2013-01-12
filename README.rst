@@ -96,6 +96,13 @@ Search Examples
 	mylog.searchDate(None,None,"11") # Returns first line
 	mylog.searchDate("2013","01") # Returns both lines
 
+Other Functions
+---------------
+
+You can easily completely erase your log file by calling ``mylog.clear()``.
+
+You can read the contents of your log file as a single string with ``mylog.read()``.
+
 
 Variables
 ===========

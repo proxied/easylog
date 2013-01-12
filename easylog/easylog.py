@@ -137,3 +137,13 @@ class EasyLog:
 					if day==line[2]: matches.append(oldloglist[loglist.index(line)])
 
 			return matches
+
+	def clear(self):
+		# Completely clears out the log file.
+		with open(self.fname, "w"): pass
+
+	def read(self):
+		# Returns the contents of the log file as a single string.
+		# If you want to get it as an array, use search() with no
+		# parameters instead.
+		with open(self.fname, "r") as log: return log.read()

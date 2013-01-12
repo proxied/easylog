@@ -1,3 +1,4 @@
+v0.5.0 : 1/12/2013 -- Added printLogs variable; added clear() and read() functions.
 v0.4.2 : 1/12/2013 -- Updated README.rst
 v0.4.1 : 1/12/2013 -- Added searchDate() function. Updated README.rst
 v0.4.0 : 1/12/2013 -- Added search() and searchTime() functions.
