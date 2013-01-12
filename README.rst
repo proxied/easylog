@@ -61,14 +61,11 @@ Variables
 
 Here is a table of the different variables you are able to configure:
 
-+==========+==========+=========================================================+
-| Name     | Default  | Description                                             |
-+==========+==========+=========================================================+
-| fname    | "log.txt"| The file name to store the logs.                        |
-+----------+----------+---------------------------------------------------------+
-| defType  | "INFO"   | The default lof message type.                           |
-+----------+----------+---------------------------------------------------------+
-| showTime | True     | Determines whether to add time stamp to logs.           |
-+----------+----------+---------------------------------------------------------+
-| showType | True     | Determines whether to add the type of message.          |
-+----------+----------+---------------------------------------------------------+
+========  ===========  =====================================
+  Name      Default                 Description
+========  ===========  =====================================
+fname     "log.txt"    The file name to store the logs.
+defType   "INFO"       The default message type.
+showTime  True         Determines whether to add time stamp.
+showType  True         Determines whether to add the type.
+========  ===========  =====================================
