@@ -116,5 +116,5 @@ fname      "log.txt"    The file name to store the logs.
 defType    "INFO"       The default message type.
 showTime   True         Determines whether to add time stamp to logs.
 showType   True         Determines whether to add the type to logs.
-printLogs  False       Determines whether to print out log messages.
+printLogs  False        Determines whether to print out log messages.
 =========  ===========  =============================================
