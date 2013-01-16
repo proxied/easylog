@@ -1,3 +1,4 @@
+v0.8.0 : 1/12/2013 -- Added log message subtypes.
 v0.7.0 : 1/12/2013 -- Added chart() function. Requires pygooglechart: pygooglechart.slowchop.com
 v0.6.0 : 1/12/2013 -- Added searchTypes() function.
 v0.5.0 : 1/12/2013 -- Added printLogs variable; added clear() and read() functions.

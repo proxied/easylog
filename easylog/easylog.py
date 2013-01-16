@@ -8,8 +8,8 @@ class EasyLog:
 	def __init__(self, **attrs):
 		self.__dict__.update(**attrs) # Add the given parameters into the dictionary
 
-		defaultVariables = ["fname","defType","showTime","showType","printLogs"] # Default variable list
-		defaultValues = ["log.txt", "INFO", True, True, False] # Default values list
+		defaultVariables = ["fname","defType","showTime","showType","printLogs","defSubType"] # Default variable list
+		defaultValues = ["log.txt", "INFO", True, True, False, "GENERAL"] # Default values list
 
 		for var in defaultVariables:
 			if var not in self.__dict__:
@@ -44,20 +44,26 @@ class EasyLog:
 		# Defaults to the boolean False
 		self.printLogs = printLogs
 
+	def setDefSubType(self, defSubType):
+		# The defSubType variable is the default log message subtype.
+		# Defaults to the string GENERAL
+		self.defSubType = defSubType
+
 	def setVar(self, **attrs):
 		# Edits any number of variables you want.
 		# Example usage:    mylog.setVar(fname="logfile.txt", showTime=False)
 		self.__dict__.update(**attrs)
 
-	def log(self, text="", msgType=""):
+	def log(self, text="", msgType="", subType=""):
 		# Logs to fname a message in the following format:
 		# (YYYY-MM-DD HH-MM-SS) [TYPE] Your message here.
 
 		if  msgType == "": msgType = self.defType # If msgType not specified, set to the default
+		if  subType == "":  subType = self.defSubType # If msgType not specified, set to the default
 
 		curtime = strftime("%Y-%m-%d %H:%M:%S", localtime()) # Loads the current time into a string
 
-		message = "(%s) [%s] %s\n" % (curtime, msgType, text)
+		message = "(%s) [%s] {%s} %s\n" % (curtime, msgType, subType, text)
 
 		with open(self.fname, "a") as log: # Opens the log file for appending
 			log.write(message)
@@ -155,6 +161,24 @@ class EasyLog:
 
 			if format == "dict": return dict(zip(types,occurences))
 			elif format == "tuple": return (types,occurences)
+
+	def searchSubTypes(self, format="tuple"):
+		# Searches through the log file and returns a dictionary in the format {SUBTYPE: OCCURENCES}
+
+		with open(self.fname, "r") as log: # Opens the log file for reading
+			loglist = log.readlines() # Put the log file into array, one line per index
+			types, occurences = [], []
+
+			loglist = [line.split("}")[0] for line in loglist] # Seperate into just the subtype
+			loglist = [line.split("{")[1] for line in loglist] # Seperate into just the subtype
+
+			for line in loglist:
+				if not line in types: types.append(line); occurences.append(1) # Add this subtype to the list if needed
+				elif line in types: occurences[types.index(line)]+=1 # Update the corresponding value
+
+			if format == "dict": return dict(zip(types,occurences))
+			elif format == "tuple": return (types,occurences)
+
 
 	def clear(self):
 		# Completely clears out the log file.

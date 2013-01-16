@@ -40,6 +40,9 @@ You can set the configuration variables with certain functions:
 	mylog.setDefType("WARNING")
 	print mylog.defType
 	
+	mylog.setDefSubType("IOERROR")
+	print mylog.defSubType
+	
 	mylog.setShowTime(False)
 	print mylog.showTime
 	
@@ -60,8 +63,11 @@ It is also possible to give your log object these parameters when you create it:
 	mylog = easylog.EasyLog(fname="mylog.txt", showTime=False)
 
 
-To log a message, use the following syntax: ``mylog.log(message, msgType)``
+To log a message, use the following syntax: ``mylog.log(message, msgType, subType)``
 With message being your message (obviously) and msgType being the type, I.E., "WARNING".
+Note that specifying msgType and subType is optional and can be ommited. If the fields are
+left as empty strings (which is the default if not specifyed), the msgType or subType will
+be whatever defType or defSubType is.
 
 Searching
 ---------
@@ -80,6 +86,8 @@ given. To get any of one of the variables, I.E., any second, put ``None``.
 By default, it is 'tuple' which will return a tuple (types,occurences) with types and occurences both being lists. Alternatively,
 you can specify the format as ``'dict'`` to get a dictionary in the form ``{TYPE:OCCURENCES}``.
 
+``searchSubTypes(format)`` is a direct copy of ``searchTypes()``, but will search through the subtypes.
+
 Search Examples
 ---------------
 
@@ -87,8 +95,8 @@ Search Examples
 
 	# Imagine that we have a log.txt file which looks like this:
 	#
-	# (2013-01-11 21:14:30) [INFO] This is a test.
-	# (2013-01-12 11:14:12) [ERROR] This is a second test.
+	# (2013-01-11 21:14:30) [INFO] {GENERAL} This is a test.
+	# (2013-01-12 11:14:12) [ERROR] {OTHER} This is a second test.
 	
 	from easylog import *
 	mylog = easylog.EasyLog()
@@ -101,6 +109,7 @@ Search Examples
 	mylog.searchDate("2013","01") # Returns both lines
 	mylog.searchTypes() # Returns ['INFO','ERROR'],[1,1]
 	mylog.searchTypes('dict') # Returns {'INFO':1, 'ERROR':1}
+	mylog.searchSubTypes() # Returns ['GENERAL','OTHER'],[1,1]
 
 Other Functions
 ---------------
@@ -119,12 +128,13 @@ Variables
 
 Here is a table of the different variables you are able to configure:
 
-=========  ===========  =============================================
-  Name      Default                     Description
-=========  ===========  =============================================
-fname      "log.txt"    The file name to store the logs.
-defType    "INFO"       The default message type.
-showTime   True         Determines whether to add time stamp to logs.
-showType   True         Determines whether to add the type to logs.
-printLogs  False        Determines whether to print out log messages.
-=========  ===========  =============================================
+=============  ===========  =============================================
+ Name           Default                     Description
+=============  ===========  =============================================
+fname          "log.txt"    The file name to store the logs.
+defType        "INFO"       The default message type.
+defSubType     "GENERAL"    The default message subtype.
+showTime       True         Determines whether to add time stamp to logs.
+showType       True         Determines whether to add the type to logs.
+printLogs      False        Determines whether to print out log messages.
+=============  ===========  =============================================
